@@ -1,0 +1,26 @@
+{
+  "name": "yimobiletest",
+  "version": "1.0.0",
+  "description": "Teste de estagio da empresa Yi Mobile",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IceVct/YiMobileTest.git"
+  },
+  "author": "Victor Araujo Vieira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IceVct/YiMobileTest/issues"
+  },
+  "homepage": "https://github.com/IceVct/YiMobileTest#readme",
+  "dependencies": {
+    "cron": "^1.3.0",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "node-coinmarketcap": "^0.2.0",
+    "poloniex-api-node": "^1.8.1"
+  }
+}
