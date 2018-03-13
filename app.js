@@ -8,6 +8,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const connection = require('express-myconnection');
+const mysql = require('mysql');
 const usersRoutes = require('./api/routes/users');
 const priceRoutes = require('./api/routes/price');
 const ordersRoutes = require('./api/routes/orders');
@@ -19,16 +21,16 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 
 // Handling with the API permissions for preventing CORS errors
-app.use(function(req, res, next){
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 
-		'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-	// the only allowed http methods
-	if(req.method === 'OPTIONS'){
-		res.header('Access-Control-Allow-Methods', 'GET', 'POST');
-		return status(200).json({});
-	}
-});
+// app.use(function(req, res, next){
+// 	res.header("Access-Control-Allow-Origin", "*");
+// 	res.header("Access-Control-Allow-Headers", 
+// 		"Origin, X-Requested-With, Content-Type, Accept, Authorization");
+// 	// the only allowed http methods
+// 	if(req.method === 'OPTIONS'){
+// 		res.header('Access-Control-Allow-Methods', 'GET, POST');
+// 		return status(200).json({});
+// 	}
+// });
 
 // Routes for handling requests
 app.use('/users', usersRoutes);
@@ -36,7 +38,6 @@ app.use('/price', priceRoutes);
 app.use('/orders', ordersRoutes);
 
 // Error handling
-
 // Handling error in case that the URL requested is not valid or it doesnt exist
 app.use(function(req, res, next){
 	const error = new Error('Not found!');

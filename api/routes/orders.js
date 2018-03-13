@@ -6,16 +6,17 @@
 // Setting the modules/variables for the orders route
 const express = require('express');
 const router = express.Router();
+const checkAuth = require('../middleware/check-auth');
 
-// Handles GET requests for /orders
-router.get('/', function(req, res, next){
+// Handles GET requests for /orders, which returns every orders from an user
+router.get('/', checkAuth, function(req, res, next){
 	res.status(200).json({
 		message: "Orders GET" 
 	});
 });
 
-// Handles POST requests for /orders
-router.post('/', function(req, res, next){
+// Handles POST requests for /orders, which add an order for an user
+router.post('/', checkAuth, function(req, res, next){
 	// thanks for the body parser, the request has a body property, which contains properties
 	// from the json object corresponding to the order registered
 	var order = {
