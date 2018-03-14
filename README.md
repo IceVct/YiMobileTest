@@ -14,9 +14,13 @@ adicioná-lo no header das requisições como Authorization e com a seguinte est
 
 Para executar o projeto, tem que ter instalado Node.js e MySQL na sua máquina.
 
+## Acessando a documentação da API
+
+Para acessar a documentação da API, basta acessar o diretório `./apidoc` a partir do diretório raiz do projeto e abrir o
+arquivo `index.html` no browser de preferência.
+
 ## Instalação das dependências
 
-To install dependencies enter project folder and run following command:
 Para instalar as dependências necessárias para rodar o projeto, entre no diretório raiz do projeto e rode o comando:
 
 `npm install`
