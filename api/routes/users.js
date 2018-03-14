@@ -13,15 +13,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const connection = mysql.createConnection(dbconfig.connection);
 
-connection.connect(function(error){
-	if(error){
-		console.log('Error connecting to the database!');
-		throw error;
-	}else{
-		console.log('Database connected!');
-	}
-});
-
 // Handles POST requests for /users, which is the login method
 router.post('/login', function(req, res, next){
 	// searching for the user in the database
@@ -44,11 +35,12 @@ router.post('/login', function(req, res, next){
 				// if the password passed as argument is the same as the recorded in the database
 				// in other words, the authentication is successfull
 				if(result){
-					// creating the token
+					// creating the token, with the user id and email attached to it
 					const token = jwt.sign({
+						id: results[0].id,
 						email: results[0].email,
 					}, 'TesteYiMobile', {
-						expiresIn: 60
+						expiresIn: "2h"
 					});
 
 					return res.status(200).json({

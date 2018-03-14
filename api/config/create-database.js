@@ -38,7 +38,7 @@ connection.query('\
 CREATE TABLE IF NOT EXISTS`' + dbconfig.database + '`.`' + dbconfig.orders_table + '` ( \
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT, \
     `usuarioid` INT UNSIGNED NOT NULL, \
-    `data` DATETIME NOT NULL, \
+    `data` VARCHAR(25) NOT NULL, \
     `qtdbtc` VARCHAR(70) NOT NULL, \
     `valorporbtc` VARCHAR(70) NOT NULL, \
     `tipo` VARCHAR(7), \
@@ -58,7 +58,7 @@ connection.query('\
 CREATE TABLE IF NOT EXISTS `' + dbconfig.database + '`.`' + dbconfig.price_table + '` ( \
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT, \
     `moeda` VARCHAR(12) NOT NULL, \
-    `data` DATETIME NOT NULL, \
+    `data` VARCHAR(25) NOT NULL, \
     `valor` VARCHAR(70) NOT NULL, \
     `exchange` VARCHAR(70) NOT NULL, \
         PRIMARY KEY (`id`), \

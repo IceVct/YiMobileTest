@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 module.exports = function(req, res, next){
 	try{
 		var token = req.headers.authorization.split(" ")[1]; // it takes the token, and it ignores the bearer
-		var decoded = jwt.verify(token, 'secret');
+		var decoded = jwt.verify(token, 'TesteYiMobile');
 		res.userData = decoded;
 		next();
 	}catch(error){
