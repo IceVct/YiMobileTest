@@ -13,6 +13,33 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const connection = mysql.createConnection(dbconfig.connection);
 
+
+/**
+ * @api {post} /users/login User login
+ * @apiName PostUsers
+ * @apiGroup Users
+ * @apiPermission none
+ *
+ * @apiParam {String} email User's email.
+ * @apiParam {String} senha User's password.
+ *
+ * @apiSuccess {String} message Message containing an information.
+ * @apiSuccess {String} token Token for using the /orders methods from the API.
+ *
+ * @apiSuccessExample Success-Response:
+ *     {
+ *			"message": "Successfull authentication!",
+ *  		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsIjoidGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNTIwOTgzNTA3LCJleHAiOjE1MjA5OTA3MDd9.Ir3mtGsuIMzNNIl7L1zDA9B45eDyNAHuBRu4io59ahI"
+ *     }
+ *
+ * @apiError FailedAuthentication If the User doesn't exist or the password is wrong.
+ *
+ * @apiErrorExample Error-Response:
+ *     {
+ *       "message": "Authentication failed!"
+ *     }
+ */
+
 // Handles POST requests for /users, which is the login method
 router.post('/login', function(req, res, next){
 	// searching for the user in the database
@@ -49,7 +76,7 @@ router.post('/login', function(req, res, next){
 					});
 				}
 
-				// if its a wrong passed
+				// if its a wrong password
 				res.status(401).json({
 					message: 'Authentication failed!'
 				});
@@ -58,6 +85,30 @@ router.post('/login', function(req, res, next){
 		}
 	});
 });
+
+/**
+ * @api {post} /users/signup User signup
+ * @apiName Post2Users
+ * @apiGroup Users
+ * @apiPermission none
+ *
+ * @apiParam {String} email User's email.
+ * @apiParam {String} senha User's password.
+ *
+ * @apiSuccess {String} message Message containing an information.
+ *
+ * @apiSuccessExample Success-Response:
+ *     {
+ *			"message": "User successfully registered!",
+ *     }
+ *
+ * @apiError AlreadyRegisteredUser If the User already exists in the database.
+ *
+ * @apiErrorExample Error-Response:
+ *     {
+ *       "message": "Already registered email!"
+ *     }
+ */
 
 // Handles POST requests for /users, which is the sign up method
 router.post('/signup', function(req, res, next){
