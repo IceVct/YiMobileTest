@@ -97,8 +97,6 @@ router.get('/', checkAuth, function(req, res, next){
 	});
 });
 
-global.bitcoinValue;
-
 /**
  * @api {post} /orders/ Add an order for an user
  * @apiName PostOrders
@@ -131,16 +129,11 @@ global.bitcoinValue;
  *     }
  */
 
+//global.bitcoinValue;
 // Handles POST requests for /orders, which add an order for an user
 router.post('/', checkAuth, function(req, res, next){
 	// thanks for the body parser, the request has a body property, which contains properties
 	// from the json object corresponding to the order registered
-
-	// query for taking the current bitcoin value in the database
-	connection.query('SELECT valor FROM price', function(err, results){
-		if(err) throw err;
-		bitcoinValue = results[results.length - 1].valor;
-	});
 
 	var date = new Date();
 	// assembling the order object
@@ -148,9 +141,16 @@ router.post('/', checkAuth, function(req, res, next){
 		usuarioid: res.userData.id,
 		data: date.toLocaleString(),
 		qtdbtc: req.body.qtdbtc,
-		valorporbtc: bitcoinValue,
+		valorporbtc: '',
 		tipo: req.body.tipo
 	};
+
+	// query for taking the current bitcoin value in the database
+	connection.query('SELECT valor FROM price', function(err, results){
+		if(err) throw err;
+		var bitcoinValue = results[results.length - 1].valor;
+		order.valorporbtc = bitcoinValue;
+	});
 
 	// inserting the order into the database
 	connection.query('INSERT INTO orders SET ?', order, function(err, results){
