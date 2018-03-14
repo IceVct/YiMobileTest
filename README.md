@@ -27,5 +27,5 @@ banco de dados para seu MySQL local.
 
 Para criar as tabelas e o banco de dados, rode o comando `node ./api/scripts/create-database.js`
 ## Para rodar o servidor:
-git
+
 `node server.js`
